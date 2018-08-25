@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: WP User locator
- * Description: Plugin for user location detection. You can get user location coordinates or address (city, zip).
+ * Description: Plugin for user location detection. You can get user location coordinates or address (city, zip). You can use PHP function wpul_get_user_location() to get array with user location or global JS object WPUL.
  * Plugin URI: https://wp-user-locator.deninichi.com
  * Author: Denis Nichik
  * Author URI: http://deninichi.com
@@ -40,7 +40,7 @@ class WP_User_Locator {
 	/**
 	 * Creates or returns an instance of this class.
 	 * @since  1.0.0
-	 * @return Plugin_Class_Name A single instance of this class.
+	 * @return WP_User_Locator A single instance of this class.
 	 */
 	public static function get_instance() {
 		if ( null === self::$instance ) {
@@ -54,15 +54,22 @@ class WP_User_Locator {
 
 		// Include user IP address functions
 		require_once WPUL_PATH . 'includes/wpul-ip.php';
-		
-
-		// Include Geo IP library
-		require_once WPUL_PATH . 'includes/vendor/autoload.php';
 
 
 		// Include Geo IP functions
 		require_once WPUL_PATH . 'includes/wpul-geo-ip-functions.php';
 
+		// Enqueue scripts/styles
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 5 );
+	}
+
+	function enqueue(){
+
+		// enqueue scripts
+		wp_enqueue_script( 'wpul-scripts', plugins_url( '/assets/js/scripts.js', __FILE__ ), array( 'jquery' ), false, false );
+		wp_localize_script( 'wpul-scripts', 'WPUL', array(
+			'user_location' => wpul_get_user_location()
+		) );
 	}
 
 }

@@ -1,5 +1,9 @@
 <?php 
 
+// Include Geo IP library
+require_once WPUL_PATH . 'includes/vendor/autoload.php';
+
+
 /**
  * Get user lat/lon
  * 
