@@ -18,9 +18,7 @@ function wpul_get_user_location( $ip = '' ){
 	$gi = geoip_open( WPUL_PATH . "includes/geo-ip-database/GeoLiteCity.dat" ,GEOIP_STANDARD );
 
 	if ( '' === $ip ) {
-		
-		$ip = wpul_get_user_ip();
-
+		$ip = WP_User_IP::wpul_get_user_ip();
 	}
 
 	$location = GeoIP_record_by_addr( $gi, $ip );

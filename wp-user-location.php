@@ -1,14 +1,14 @@
 <?php 
 
 /**
- * Plugin Name: WP User locator
+ * Plugin Name: WP User Locator
  * Description: Plugin for user location detection. You can get user location coordinates or address (city, zip). You can use PHP function wpul_get_user_location() to get array with user location or global JS object WPUL.
  * Plugin URI: https://wp-user-locator.deninichi.com
  * Author: Denis Nichik
  * Author URI: http://deninichi.com
  * Version: 1.0.0
  * License: GPL2
- * Text Domain: wp-u-locator
+ * Text Domain: wpul
  */
 
 /*
